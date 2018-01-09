@@ -74,6 +74,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="kMacro" type="application/atom+xml" />
+
 
 
 
@@ -83,7 +85,7 @@
 <meta name="keywords" content="java,maven">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java开发小技巧（三）：Maven多工程依赖项目">
-<meta property="og:url" content="http://yoursite.com/2017/12/22/java-dev3/index.html">
+<meta property="og:url" content="https://zkhdev.github.io/2017/12/22/java-dev3/index.html">
 <meta property="og:site_name" content="kMacro">
 <meta property="og:description" content="本篇文章基于Java开发小技巧（二）：自定义Maven依赖中创建的父工程project-monitor实现，运用我们自定义的依赖包进行多工程依赖项目的开发。">
 <meta property="og:locale" content="zh-Hans">
@@ -126,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/22/java-dev3/"/>
+  <link rel="canonical" href="https://zkhdev.github.io/2017/12/22/java-dev3/"/>
 
 
 
@@ -138,6 +140,16 @@
 
 
 
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?21a8e5c2a0d28012615bdb023edc9695";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -226,6 +238,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -259,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/22/java-dev3/">
+    <link itemprop="mainEntityOfPage" href="https://zkhdev.github.io/2017/12/22/java-dev3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="kMacro">
@@ -349,7 +371,7 @@
 
       
         <p><img src="http://upload-images.jianshu.io/upload_images/5266042-26f2758e0f40a631.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Maven多工程依赖项目开发流程"></p>
-<p>本篇文章基于<a href="https://zkhdev.github.io/2017/12/21/java-dev2/" target="_blank" rel="noopener">Java开发小技巧（二）：自定义Maven依赖</a>中创建的父工程<code>project-monitor</code>实现，运用我们自定义的依赖包进行多工程依赖项目的开发。<br><a id="more"></a><br>下面以多可执行Jar包项目的开发为例，进行Maven多工程依赖项目开发的讲解。</p>
+<p>本篇文章基于<a href="https://zkhdev.github.io/2017/12/21/java-dev2/">Java开发小技巧（二）：自定义Maven依赖</a>中创建的父工程<code>project-monitor</code>实现，运用我们自定义的依赖包进行多工程依赖项目的开发。<br><a id="more"></a><br>下面以多可执行Jar包项目的开发为例，进行Maven多工程依赖项目开发的讲解。</p>
 <h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><p>首先来看一下封面图，我们要实现的效果是：<br>1.多个项目共享一个项目的类和方法等通用内容<br>2.每个子项目单独导入所需依赖，以及各自填充父项目配置文件中的占位符<br>3.子项目按指定目录结构进行打包<br>4.所有子项目集成打包到一个统一的目录，共享依赖包和配置文件等内容<br>5.打包后目录结构：</p>
 <ul>
 <li>bin：存放脚本文件，用来设置环境变量，执行相应的jar包</li>
@@ -379,7 +401,7 @@
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>项目终于开发演示完毕，这里只是创建一个打造可执行jar包的子项目作为例子，你还可以创建多个子项目，最后打包的时候合并相同的依赖和配置文件，然后在<code>bin</code>中创建相应项目的执行文件即可，各个子项目之间也可进行相互依赖。<br>以上开发技巧不仅适用于可执行jar包的开发，同样适用于WEB项目的开发，具体还是由项目需求决定。</p>
 <p>文章项目源码已发布到Github：<a href="https://github.com/ZKHDEV/MultDependPjo" target="_blank" rel="noopener">https://github.com/ZKHDEV/MultDependPjo</a></p>
 <blockquote>
-<p>本文为作者<a href="https://zkhdev.github.io/" target="_blank" rel="noopener">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/12/22/java_dev3/。" target="_blank" rel="noopener">https://zkhdev.github.io/2017/12/22/java_dev3/。</a></p>
+<p>本文为作者<a href="https://zkhdev.github.io/">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/12/22/java_dev3/。">https://zkhdev.github.io/2017/12/22/java_dev3/。</a></p>
 </blockquote>
 
       
@@ -537,6 +559,13 @@
           </nav>
 
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
 
           
             <div class="links-of-author motion-element">
@@ -609,7 +638,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -619,17 +648,13 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
+  <div class="footer-custom">Hosted by <a target="_blank" href="https://github.com/ZKHDEV">GitHub</a></div>
 
 
         
@@ -674,6 +699,8 @@
   
 
 
+  
+
 
 
 
@@ -712,6 +739,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
