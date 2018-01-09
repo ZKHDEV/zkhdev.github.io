@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="大数据,teradata,数据仓库," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="随着计算机系统在处理能力、存储能力等方面，特别是计算机软件技术的不断提高，使得信息处理技术得到飞速发展。数据处理主要分为两大类：联机事物处理OLTP、联机分析处理OLAP。OLTP也就是传统的关系型数据库应用，主要功能是基本的、日常的事务处理操作，对响应时间要求非常高，是一种面向应用的生产系统。OLAP是基于数据仓库的面向主题的信息分析处理过程。">
+<meta name="keywords" content="大数据,teradata,数据仓库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据仓库 - Teradata学习体会">
+<meta property="og:url" content="http://yoursite.com/2017/07/30/teradata/index.html">
+<meta property="og:site_name" content="kMacro">
+<meta property="og:description" content="随着计算机系统在处理能力、存储能力等方面，特别是计算机软件技术的不断提高，使得信息处理技术得到飞速发展。数据处理主要分为两大类：联机事物处理OLTP、联机分析处理OLAP。OLTP也就是传统的关系型数据库应用，主要功能是基本的、日常的事务处理操作，对响应时间要求非常高，是一种面向应用的生产系统。OLAP是基于数据仓库的面向主题的信息分析处理过程。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-3a8a8be63de67b76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-ea5f11bcecc5720d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-09T14:38:20.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据仓库 - Teradata学习体会">
+<meta name="twitter:description" content="随着计算机系统在处理能力、存储能力等方面，特别是计算机软件技术的不断提高，使得信息处理技术得到飞速发展。数据处理主要分为两大类：联机事物处理OLTP、联机分析处理OLAP。OLTP也就是传统的关系型数据库应用，主要功能是基本的、日常的事务处理操作，对响应时间要求非常高，是一种面向应用的生产系统。OLAP是基于数据仓库的面向主题的信息分析处理过程。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/5266042-3a8a8be63de67b76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/30/teradata/"/>
+
+
+
+
+
+  <title>数据仓库 - Teradata学习体会 | kMacro</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">kMacro</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Make the best of things</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/teradata/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kMacro">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kMacro">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据仓库 - Teradata学习体会</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-30T15:40:36+08:00">
+                2017-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/5266042-3a8a8be63de67b76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>随着计算机系统在处理能力、存储能力等方面，特别是计算机软件技术的不断提高，使得信息处理技术得到飞速发展。数据处理主要分为两大类：联机事物处理OLTP、联机分析处理OLAP。OLTP也就是传统的关系型数据库应用，主要功能是基本的、日常的事务处理操作，对响应时间要求非常高，是一种面向应用的生产系统。OLAP是基于数据仓库的面向主题的信息分析处理过程。<br><a id="more"></a></p>
+<h1 id="什么是数据仓库"><a href="#什么是数据仓库" class="headerlink" title="什么是数据仓库"></a>什么是数据仓库</h1><p>与传统关系型数据库不同的是，数据仓库储存的是历史数据，针对数据仓库系统的查询大都非常复杂，特别消耗系统资源，对系统的可扩展能力和并行处理能力要求很高。数据仓库主要面向业务人员和管理人员，用来帮助企业管理人员作出更符合业务发展规律的决策，所以也称数据仓库为决策支持系统。数据仓库的数据来自多个数据库，并且按照预先定义好的模型对抽取的数据进行转换过滤，再将结果存放到数据仓库中。</p>
+<h1 id="Teradata-数据库"><a href="#Teradata-数据库" class="headerlink" title="Teradata 数据库"></a>Teradata 数据库</h1><p>为了解决传统数据库在大量数据的查询分析等方面的局限性，Teradata公司推出了Teradata关系数据库管理系统。Teradata采用标准的SQL查询语言，适用于处理复杂查询数据仓库应用。   </p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Teradata的主要组件是<strong>解析引擎、BYNET和访问模块处理器（AMP）</strong>。<br><img src="http://upload-images.jianshu.io/upload_images/5266042-ea5f11bcecc5720d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>解析引擎负责从客户端接收查询命令并制定执行计划。</li>
+<li>BYNET相当于网络层，它从解析引擎接收执行计划并发送给相应的AMP，AMP的选择采用哈希算法实现。</li>
+<li>数据表中的记录均匀分布在个AMP之间，每个AMP与存储数据的一组磁盘相关联。从BYNET接收数据和执行计划后，进行类型转换、聚合、过滤和排序等操作并将数据存储到与其关联的磁盘中。</li>
+</ul>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>使用Teradata提供的免费Teradata数据库开发人员版本可以进行开发测试，通过Teradata SQL Assistant或BTEQ等数据库管理工具可以对数据仓库进行操作，默认用户为DBC，SQL语法和其它数据库区别不大，但其独特的内部结构适合需要处理复杂数据查询的应用。</p>
+<h2 id="SQL-语法"><a href="#SQL-语法" class="headerlink" title="SQL 语法"></a>SQL 语法</h2><p>Teradata使用了标准的SQL语法并在此基础上进行了扩展，以增强数据库管理系统的功能。所有的系统对象如Table、View、Macro等存储在数据字典中，数据字典的所有者为DBC用户，在客户端可以调用数据字典中的对象访问数据库。刚开始使用Teradata时可以使用其帮助系统提供的命令HELP、SHOW、EXPLAIN查看数据库中各种对象的结构以及SQL请求的执行过程，对理解Teradata工作原理以及各种SQL语句的使用有很大帮助。</p>
+<h1 id="体会"><a href="#体会" class="headerlink" title="体会"></a>体会</h1><p>在如今快速发展的大数据革命时代，数据积累量越来越多，其中蕴含着大量重要的信息，通过对这些数据进行分析和综合处理，可以发掘出对企业发展、政府管理部门至关重要的业务信息，帮助管理人员作出合理的决策。  </p>
+<p>当然，传统的关系型数据库也是可以完成基本的事务处理和数据分析操作的，但是当数据量非常庞大时，数据库就显得无能为力了。比如，一个早期的电商平台，只需一个网站、几台服务器、一个MySQL就可以运营了，当客户增多、数据量增大时，只需采用多台服务器、多个数据库的方式就可以勉强应付，但是随着数据量的不断增长，数据之间的关系也越来越复杂，管理人员此时关心的不是“昨天营业额是多少”这类问题，而是“哪些用户是高价值用户”、“某商品的销售量与哪些因素有关”等，这时就需要建立数据仓库了，Teradata数据仓库是专门针对决策支持系统的特点而开发的关系数据库管理系统，相对于其它商业数据库，Teradata更适合需要处理大数据量及数据分析的应用，可以极大提高应用的性能。  </p>
+<p>数据库可以存储和处理数据，而数据仓库的职责则是发掘数据的价值，最大程度地利用数据。</p>
+<blockquote>
+<p>本文为作者<a href="https://zkhdev.github.io/" target="_blank" rel="noopener">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/07/30/teradata/。" target="_blank" rel="noopener">https://zkhdev.github.io/2017/07/30/teradata/。</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/大数据/" rel="tag"># 大数据</a>
+          
+            <a href="/tags/teradata/" rel="tag"># teradata</a>
+          
+            <a href="/tags/数据仓库/" rel="tag"># 数据仓库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/26/js-lazy/" rel="next" title="JS设计模式（二） 惰性模式">
+                <i class="fa fa-chevron-left"></i> JS设计模式（二） 惰性模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/31/js-dao/" rel="prev" title="JS设计模式（三） 数据访问对象模式">
+                JS设计模式（三） 数据访问对象模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="kMacro" />
+            
+              <p class="site-author-name" itemprop="name">kMacro</p>
+              <p class="site-description motion-element" itemprop="description">好好学习，天天向上:)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZKHDEV" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhangkh100@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/7c65dc20fdaa" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/zkh_101" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是数据仓库"><span class="nav-number">1.</span> <span class="nav-text">什么是数据仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Teradata-数据库"><span class="nav-number">2.</span> <span class="nav-text">Teradata 数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">2.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作"><span class="nav-number">2.2.</span> <span class="nav-text">操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL-语法"><span class="nav-number">2.3.</span> <span class="nav-text">SQL 语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#体会"><span class="nav-number">3.</span> <span class="nav-text">体会</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kMacro</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

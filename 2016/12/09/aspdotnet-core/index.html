@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content=".net,asp," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content=".NET Core 是.NET Framework的新一代跨平台应用程序开发框架，是微软在一开始发展时就开源的软件平台，由于 .NET Core 的开发目标是跨平台的 .NET 平台，因此 .NET Core 包含 .NET Framework 的类库，但与 .NET Framework 不同的是 .NET Core 所有类库都采用NuGet的管理方式，应用程序只需要获取需要的组件即可，与 .N">
+<meta name="keywords" content=".net,asp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开始使用ASP.NET Core - 创建第一个Web应用">
+<meta property="og:url" content="http://yoursite.com/2016/12/09/aspdotnet-core/index.html">
+<meta property="og:site_name" content="kMacro">
+<meta property="og:description" content=".NET Core 是.NET Framework的新一代跨平台应用程序开发框架，是微软在一开始发展时就开源的软件平台，由于 .NET Core 的开发目标是跨平台的 .NET 平台，因此 .NET Core 包含 .NET Framework 的类库，但与 .NET Framework 不同的是 .NET Core 所有类库都采用NuGet的管理方式，应用程序只需要获取需要的组件即可，与 .N">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-3f7ad7d6e8ef2cb3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-551416d83b5c818c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-fbf78a72f0fbef60?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-8bce2d69caedeb47?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-32f0c8ac53bb8be6?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-0b1cfe8a3d747448?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-82b183c94fdb23b4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-561af54a9b768728?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-58987f457228c8d0?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-58ae66deec8bcdec?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-0245a9fe3fe07767?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-1ad9e532acdc8927?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-54b52ef6108e5887?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-860824b752fdd514?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-b9d00c539e50e372?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-56c85194a87f2adf?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-5d12e8209bfc366c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-09T08:20:17.679Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开始使用ASP.NET Core - 创建第一个Web应用">
+<meta name="twitter:description" content=".NET Core 是.NET Framework的新一代跨平台应用程序开发框架，是微软在一开始发展时就开源的软件平台，由于 .NET Core 的开发目标是跨平台的 .NET 平台，因此 .NET Core 包含 .NET Framework 的类库，但与 .NET Framework 不同的是 .NET Core 所有类库都采用NuGet的管理方式，应用程序只需要获取需要的组件即可，与 .N">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/5266042-3f7ad7d6e8ef2cb3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/09/aspdotnet-core/"/>
+
+
+
+
+
+  <title>开始使用ASP.NET Core - 创建第一个Web应用 | kMacro</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">kMacro</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Make the best of things</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/09/aspdotnet-core/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kMacro">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kMacro">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">开始使用ASP.NET Core - 创建第一个Web应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-09T16:02:31+08:00">
+                2016-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NET/" itemprop="url" rel="index">
+                    <span itemprop="name">.NET</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/5266042-3f7ad7d6e8ef2cb3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>.NET Core 是.NET Framework的新一代跨平台应用程序开发框架，是微软在一开始发展时就开源的软件平台，由于 .NET Core 的开发目标是跨平台的 .NET 平台，因此 .NET Core 包含 .NET Framework 的类库，但与 .NET Framework 不同的是 .NET Core 所有类库都采用NuGet的管理方式，应用程序只需要获取需要的组件即可，与 .NET Framework 大包式安装的作法截然不同，同时各包亦有独立的版本线 (Version line)，不再硬性要求应用程序跟随主线版本。<br><a id="more"></a><br>ASP.NET Core 以控制台应用程序驱动其托管环境 Kestrel Server 以支持 ASP.NET Core 程序的运行。ASP.NET Core 在开发初期时 .NET Core 还没有开始起跑，在 .NET Core 逐渐成熟之后，微软决定将它们集成在一起，ASP.NET Core的运行期和工具 .NET Core 以及 .NET CLI 接替提供。ASP.NET Core 并不是ASP.NET 4.6的升级版本，它是在.NET Core上重新设计的ASP.NET平台，拥有众多的新特性，其中最重要的特性就是实现了跨平台。ASP.NET Core 1.0是微软新一代ASP.NET框架，之前的版本为ASP.NET 4.6。</p>
+<hr>
+<p>接下来开始构建第一个ASP.NET Core的Web应用。</p>
+<h1 id="搭建开发环境"><a href="#搭建开发环境" class="headerlink" title="搭建开发环境"></a>搭建开发环境</h1><ul>
+<li>安装Visual Studio和 .NET Core（核心）</li>
+<li>安装Visual Studio Community 2015，如果已安装请跳过这步。<br>  <a href="https://www.visualstudio.com/en-us/visual-studio-homepage-vs.aspx" target="_blank" rel="noopener">Visual Studio 2015 Home page installer</a></li>
+<li>安装 .NET Core + Visual Studio tooling<br>  <a href="http://go.microsoft.com/fwlink/?LinkID=798306" target="_blank" rel="noopener">.NET Core + Visual Studio tooling</a></li>
+</ul>
+<h1 id="创建一个新工程"><a href="#创建一个新工程" class="headerlink" title="创建一个新工程"></a>创建一个新工程</h1><p>新建项目：</p>
+<ul>
+<li>打开“新建项目”对话框</li>
+<li>找到.NET Core下的“ASP.NET Core Web Application (.NET Core)”选项</li>
+<li>将项目命名为“CoreMovie”</li>
+<li><p>点击“确定”</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-551416d83b5c818c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+</li>
+</ul>
+<p>在弹出的对话框中：</p>
+<ul>
+<li>选择“Web应用程序”</li>
+<li>取消勾选“在云中托管”</li>
+<li><p>点击“更改身份验证”</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-fbf78a72f0fbef60?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+</li>
+</ul>
+<p>选择“个人用户账户”，点击“确定”</p>
+<p> <img src="http://upload-images.jianshu.io/upload_images/5266042-8bce2d69caedeb47?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>稍等片刻，Visual Studio会自动搭建工程的脚手架，完成后的项目结构如下：</p>
+<p> <img src="http://upload-images.jianshu.io/upload_images/5266042-32f0c8ac53bb8be6?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="添加一个Model类"><a href="#添加一个Model类" class="headerlink" title="添加一个Model类"></a>添加一个Model类</h1><p>右键点击“Models”目录&gt;添加&gt;类</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-0b1cfe8a3d747448?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>创建一个“Movie”类</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-82b183c94fdb23b4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>在类中添加以下属性：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-561af54a9b768728?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>属性“ID”是必须的，将作为数据表的主键</p>
+</blockquote>
+<h1 id="构建“控制器”"><a href="#构建“控制器”" class="headerlink" title="构建“控制器”"></a>构建“控制器”</h1><p>右键点击“Controllers”目录&gt;添加&gt;控制器</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-58987f457228c8d0?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>点击“MVC Controller with views, using Entity Framework”，添加</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-58ae66deec8bcdec?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>选择“Movie”模型类和“ApplicationDbContext”数据上下文类，使用默认控制器命名，点击添加</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-0245a9fe3fe07767?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>Visual Studio会自动创建CRUD的相关方法和视图模板。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-1ad9e532acdc8927?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="更新数据库"><a href="#更新数据库" class="headerlink" title="更新数据库"></a>更新数据库</h1><p>点击快捷键Ctrl+F5开始调试，在地址栏中输入“<a href="http://localhost:端口号/Movies”，浏览器会提示如下内容：" target="_blank" rel="noopener">http://localhost:端口号/Movies”，浏览器会提示如下内容：</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-54b52ef6108e5887?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>这是因为还没有更新数据库，需要通过以下步骤进行更新：</p>
+<ul>
+<li>打开CMD命令窗口（快捷键Ctrl+R，输入“cmd”，回车）</li>
+<li>定位到项目根目录下</li>
+<li>输入以下命令完成数据库更新</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-860824b752fdd514?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>DOTNET EF命令</p>
+<ul>
+<li>dotnet (.NET Core) 是.NET的一个跨平台实现</li>
+<li>dotnet ef migrations add Initial 参数“Initial”是任意的，此操作创建的Data/Migrations/_Initial.cs包含迁移文件命令来向数据库添加（或删除）电影表。</li>
+<li>dotnet ef database update 使用刚才创建的迁移更新数据库</li>
+</ul>
+</blockquote>
+<h1 id="测试应用程序"><a href="#测试应用程序" class="headerlink" title="测试应用程序"></a>测试应用程序</h1><p>刷新浏览器，可以看到如下页面，点击“Create New”创建新条目</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-b9d00c539e50e372?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-56c85194a87f2adf?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-5d12e8209bfc366c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>创建完成，一个最基本ASP.NET Core应用程序就创建好了。ASP.NET Core拥有众多提高开发效率的新特性，在接下来的文章中会对部分特性进行介绍。</p>
+<p>请尽情享受.NET Core带来的开发快感吧！</p>
+<blockquote>
+<p>本文为作者<a href="https://zkhdev.github.io/" target="_blank" rel="noopener">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2016/12/09/aspdotnet-core/。" target="_blank" rel="noopener">https://zkhdev.github.io/2016/12/09/aspdotnet-core/。</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/net/" rel="tag"># .net</a>
+          
+            <a href="/tags/asp/" rel="tag"># asp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/03/ubuntu-apache-rewrite/" rel="next" title="Ubuntu下Apache开启Rewrite模块">
+                <i class="fa fa-chevron-left"></i> Ubuntu下Apache开启Rewrite模块
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/23/ubuntu-sqlserver/" rel="prev" title="Ubuntu 安装 SQL Server">
+                Ubuntu 安装 SQL Server <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="kMacro" />
+            
+              <p class="site-author-name" itemprop="name">kMacro</p>
+              <p class="site-description motion-element" itemprop="description">好好学习，天天向上:)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZKHDEV" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhangkh100@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/7c65dc20fdaa" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/zkh_101" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建开发环境"><span class="nav-number">1.</span> <span class="nav-text">搭建开发环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个新工程"><span class="nav-number">2.</span> <span class="nav-text">创建一个新工程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加一个Model类"><span class="nav-number">3.</span> <span class="nav-text">添加一个Model类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建“控制器”"><span class="nav-number">4.</span> <span class="nav-text">构建“控制器”</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新数据库"><span class="nav-number">5.</span> <span class="nav-text">更新数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试应用程序"><span class="nav-number">6.</span> <span class="nav-text">测试应用程序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kMacro</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

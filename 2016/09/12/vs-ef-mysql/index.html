@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content=".net,数据库,mysql," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ADO.NET Entity Framework 是微软以 ADO.NET 为基础所发展出来的对象关系对应 (O/R Mapping) 解决方案，不仅支持SQL Server，还支持MySQL、Oracle等数据库。">
+<meta name="keywords" content=".net,数据库,mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VS2015 + EF6连接MYSQL">
+<meta property="og:url" content="http://yoursite.com/2016/09/12/vs-ef-mysql/index.html">
+<meta property="og:site_name" content="kMacro">
+<meta property="og:description" content="ADO.NET Entity Framework 是微软以 ADO.NET 为基础所发展出来的对象关系对应 (O/R Mapping) 解决方案，不仅支持SQL Server，还支持MySQL、Oracle等数据库。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-fecf3f08430366cc?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-9e5c16e4e81b5181?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-b494f76233ced983?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-5d50e1761dd34564?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-90f2f6f7a3c73209?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-54dd708adf1cf95e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-545f85b361a6290e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-4e0ed0bde2ee4f1d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-bc5a031f711c8ea8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-f68d16ca0ba92e80?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-23ee6d409df86fd0?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-65b6c25ee9b25a84?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-f79c06625a9ea34d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-602b942938822c59?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-65820aeefc221dd4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-4bd3e471bd87b826?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-ea6ce01667511f13?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-cc5ec57b6064d2f1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-921e34a53746f92d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-30241eb1226f91eb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-72809037dec28652?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-67d1c46b7de6ec1d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-54cf39524328f6f8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-22a745173fd798de?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-1755913a020791d0?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-09T15:00:32.683Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VS2015 + EF6连接MYSQL">
+<meta name="twitter:description" content="ADO.NET Entity Framework 是微软以 ADO.NET 为基础所发展出来的对象关系对应 (O/R Mapping) 解决方案，不仅支持SQL Server，还支持MySQL、Oracle等数据库。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/5266042-fecf3f08430366cc?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/12/vs-ef-mysql/"/>
+
+
+
+
+
+  <title>VS2015 + EF6连接MYSQL | kMacro</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">kMacro</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Make the best of things</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/12/vs-ef-mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kMacro">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kMacro">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">VS2015 + EF6连接MYSQL</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-12T22:55:46+08:00">
+                2016-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NET/" itemprop="url" rel="index">
+                    <span itemprop="name">.NET</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ADO.NET Entity Framework 是微软以 ADO.NET 为基础所发展出来的对象关系对应 (O/R Mapping) 解决方案，不仅支持SQL Server，还支持MySQL、Oracle等数据库。<br><a id="more"></a><br>接下来给大家讲解EF6+MYSQL具体的配置流程，以及配置过程中一些常见错误的解决方法。</p>
+<blockquote>
+<p>开发环境：Win10 + VS2015<br>数据库：MySQL 5.7.11</p>
+</blockquote>
+<hr>
+<h1 id="下载并安装插件"><a href="#下载并安装插件" class="headerlink" title="下载并安装插件"></a>下载并安装插件</h1><ul>
+<li>MySQL-Connector-net-6.9.9 <a href="http://dev.mysql.com/downloads/connector/net/" target="_blank" rel="noopener">下载</a></li>
+<li>MySQL for Visual Studio <a href="http://dev.mysql.com/downloads/installer/" target="_blank" rel="noopener">下载</a></li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong>安装<strong>MySQL for Visual Studio</strong>需下载<strong>MySQL Installer</strong>，然后在安装过程中选择MySQL for Visual Studio。</p>
+</blockquote>
+<hr>
+<h1 id="创建新的ASP-NET-MVC空白项目"><a href="#创建新的ASP-NET-MVC空白项目" class="headerlink" title="创建新的ASP.NET MVC空白项目"></a>创建新的ASP.NET MVC空白项目</h1><p>1.创建项目</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-fecf3f08430366cc?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>2.采用Nuget方式安装MySql.Data.Entity</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-9e5c16e4e81b5181?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-b494f76233ced983?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>安装完成后会多出4项引用</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-5d50e1761dd34564?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>3.添加 ADO.NET 实体数据模型</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-90f2f6f7a3c73209?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>4.选择“来自数据库的 EF 设计器”，我这里已建好数据库，所以选择了DBFirst模式</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-54dd708adf1cf95e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>5.新建连接，选择“更改(C)…”</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-545f85b361a6290e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>6.选择“MySQL DataBase”，填写连接信息</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-4e0ed0bde2ee4f1d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-bc5a031f711c8ea8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-f68d16ca0ba92e80?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>7.选择需要的表，点击“完成”，然后就大功告成了！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-23ee6d409df86fd0?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-65b6c25ee9b25a84?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<h1 id="使用空EF设计器生成数据库"><a href="#使用空EF设计器生成数据库" class="headerlink" title="使用空EF设计器生成数据库"></a>使用空EF设计器生成数据库</h1><p>1.步骤与上面类似，这里选择“空EF设计器模型”</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-f79c06625a9ea34d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>2.添加实体</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-602b942938822c59?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-65820aeefc221dd4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>3.创建一个新MySQL的数据库</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-4bd3e471bd87b826?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>4.更改模型属性，选择“SSDLTomYsql.tt(VS)”DDL生成模板（这一步很重要，否则后面会出错）</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-ea6ce01667511f13?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>5.右击模型设计器，选择“根据模型生成数据库(G)…”</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-cc5ec57b6064d2f1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>6.填写数据库连接信息，这里选择刚刚创建的“test2”数据库</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-921e34a53746f92d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>7.生成数据库脚本</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-30241eb1226f91eb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>8.将脚本全部复制到数据库中执行</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-72809037dec28652?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>9.大功告成，数据库成功创建！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-67d1c46b7de6ec1d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<h1 id="配置过程中常见错误及解决方案"><a href="#配置过程中常见错误及解决方案" class="headerlink" title="配置过程中常见错误及解决方案"></a>配置过程中常见错误及解决方案</h1><p>1.无法使用实体框架</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-54cf39524328f6f8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>解决方案：采用NuGet方式安装MySql.Data.Entity，参见第二节第4步</p>
+</blockquote>
+<p>2.未修改DDL生成模板</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-22a745173fd798de?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>解决方案：修改DDL生成模板，参见第三节第4步</p>
+</blockquote>
+<p>3.生成模型时错误</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5266042-1755913a020791d0?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>解决方案：在数据库中执行以下命令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;use &lt;&lt;数据库名称&gt;&gt;;</span><br><span class="line">&gt;set global optimizer_switch='derived_merge=OFF';</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h1 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h1><p>现在你就可以跟使用SQL Server一样使用MySQL了，虽然过程有点复杂，但还是很值得的。</p>
+<blockquote>
+<p>以上内容是本人结合一些网上教程和自己的配置经验，总结出来的成果，亲测可用。许多人被EF6+MySQL的配置折腾了很久，希望这篇文章可以给各位提供一点帮助，有不足之处欢迎留言！</p>
+<p>本文为作者<a href="https://zkhdev.github.io/" target="_blank" rel="noopener">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2016/09/12/vs-ef-mysql/。" target="_blank" rel="noopener">https://zkhdev.github.io/2016/09/12/vs-ef-mysql/。</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/net/" rel="tag"># .net</a>
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/13/tp-phpmailer/" rel="prev" title="Thinkphp使用PHPMailer发送邮件">
+                Thinkphp使用PHPMailer发送邮件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="kMacro" />
+            
+              <p class="site-author-name" itemprop="name">kMacro</p>
+              <p class="site-description motion-element" itemprop="description">好好学习，天天向上:)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZKHDEV" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhangkh100@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/7c65dc20fdaa" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/zkh_101" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载并安装插件"><span class="nav-number">1.</span> <span class="nav-text">下载并安装插件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建新的ASP-NET-MVC空白项目"><span class="nav-number">2.</span> <span class="nav-text">创建新的ASP.NET MVC空白项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用空EF设计器生成数据库"><span class="nav-number">3.</span> <span class="nav-text">使用空EF设计器生成数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置过程中常见错误及解决方案"><span class="nav-number">4.</span> <span class="nav-text">配置过程中常见错误及解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完成"><span class="nav-number">5.</span> <span class="nav-text">完成</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kMacro</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

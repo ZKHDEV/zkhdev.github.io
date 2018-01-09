@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="大数据,数据库,mysql," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="删除数据库记录是一个非常常见的需求，当数据失去价值时，我们便会删除它，但是如果操作不当，往往就会把一些有价值的数据误删掉，造成重要数据的丢失，合理采用删除方式才能更好地利用数据资源，下面介绍几种常用的删除方式。">
+<meta name="keywords" content="大数据,数据库,mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库记录删除方式">
+<meta property="og:url" content="http://yoursite.com/2017/09/04/db-delete/index.html">
+<meta property="og:site_name" content="kMacro">
+<meta property="og:description" content="删除数据库记录是一个非常常见的需求，当数据失去价值时，我们便会删除它，但是如果操作不当，往往就会把一些有价值的数据误删掉，造成重要数据的丢失，合理采用删除方式才能更好地利用数据资源，下面介绍几种常用的删除方式。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-a6b175382e0b6b78.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-09T14:25:39.366Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库记录删除方式">
+<meta name="twitter:description" content="删除数据库记录是一个非常常见的需求，当数据失去价值时，我们便会删除它，但是如果操作不当，往往就会把一些有价值的数据误删掉，造成重要数据的丢失，合理采用删除方式才能更好地利用数据资源，下面介绍几种常用的删除方式。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/5266042-a6b175382e0b6b78.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/04/db-delete/"/>
+
+
+
+
+
+  <title>数据库记录删除方式 | kMacro</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">kMacro</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Make the best of things</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/04/db-delete/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kMacro">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kMacro">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库记录删除方式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T15:59:38+08:00">
+                2017-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/5266042-a6b175382e0b6b78.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>删除数据库记录是一个非常常见的需求，当数据失去价值时，我们便会删除它，但是如果操作不当，往往就会把一些有价值的数据误删掉，造成重要数据的丢失，合理采用删除方式才能更好地利用数据资源，下面介绍几种常用的删除方式。<br><a id="more"></a></p>
+<h1 id="删除方式"><a href="#删除方式" class="headerlink" title="删除方式"></a>删除方式</h1><h2 id="物理删除"><a href="#物理删除" class="headerlink" title="物理删除"></a>物理删除</h2><p>物理删除就是直接从数据库中删除一条或多条记录，将数据从磁盘上擦除，可以使用<code>DELETE FROM</code>SQL语句实现，这种方式产生的后果就是记录永久性删除，无法找回，一般适用于小型或数据重要性不高的项目，可以提高数据库资源利用率。物理删除方式是一种最简单最基本的数据删除方式，这里不多做介绍，我们主要来看一下逻辑删除方式。</p>
+<h2 id="逻辑删除"><a href="#逻辑删除" class="headerlink" title="逻辑删除"></a>逻辑删除</h2><p>所谓的逻辑删除就是实现记录已删除的效果，但实际上数据仍然存在于数据库中，只是对用户隐藏这一部分数据。一些大型的、数据关联性高、数据重要性高的应用往往会采用这种删除方式，它可以实现回收站、删除恢复、查看历史版本等实用功能，根据业务的需要有不同的应用场景。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>例如，在一些邮箱应用中，当你删除一条邮件时，不会将邮件直接删除，而是把邮件移动到回收站，你可以在回收站中对邮件进行恢复、彻底删除等操作，可以有效防止误删等情况。<br>再比如博客管理平台一般都会提供查看修改历史、比较历史版本等功能，我们可以方便地查看文章的修改历史，以及恢复到之前某一版本。</p>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><h3 id="标记删除"><a href="#标记删除" class="headerlink" title="标记删除"></a>标记删除</h3><p>采用删除标记的方式可以很容易地实现逻辑删除功能，通过在表中添加一个删除标记字段，将正常记录的该字段设置为0，已删除记录的该字段设置为1，查询时添加一个<code>where</code>条件筛选删除标记为0的记录，就可以实现逻辑删除的功能，此时的删除业务只需要将记录的删除标记字段修改为1即可。</p>
+<h3 id="拉链"><a href="#拉链" class="headerlink" title="拉链"></a>拉链</h3><p>拉链方式来源于数据仓库，是针对数据仓库设计中表存储数据的方式而定义的，所谓拉链，就是记录历史，记录一个事物从开始到当前状态的所有变化信息。拉链算法是目前数据仓库领域最典型的算法之一。<br>这种方式的表结构与普通表的区别在于多了两个字段（<code>START_DATE</code>&amp;<code>END_DATE</code>）表示记录的有效时间，分别为记录添加时间和记录最大有效时间。</p>
+<ul>
+<li><p>数据表采用联合主键的方式，使用<code>id</code>和<code>START_DATE</code>来唯一的表示某条记录，如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`table_name`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`start_date`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`end_date`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    ...,</span><br><span class="line">    primary <span class="keyword">key</span>(<span class="string">`id`</span>,<span class="string">`start_date`</span>)</span><br><span class="line">)<span class="keyword">ENGINE</span>=MYISAM <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增记录时<code>START_DATE</code>可设置为当前时间，<code>END_DATE</code>设置为null或未来某个时间来表示无穷大，如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> table_name(start_date,end_date,...) <span class="keyword">values</span>(当前时间,一百年后,...);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询数据时只要对日期进行筛选就可得到当前有效的记录，例如</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> <span class="keyword">id</span>=记录<span class="keyword">ID</span> <span class="keyword">and</span> start_date&lt;=当前时间 <span class="keyword">and</span> end_date&gt;当前时间;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改记录的方式与传统方式不同，修改操作并不是直接修改数据库中的某条记录，而是把修改的原有效记录的<code>END_DATE</code>设置为当前时间,接下来新增一条完整的、修改后的记录，如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> table_name <span class="keyword">set</span> end_date=当前时间 <span class="keyword">where</span> <span class="keyword">id</span>=原记录<span class="keyword">ID</span> <span class="keyword">and</span> end_date=一百年后;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> table_name(<span class="keyword">id</span>,start_date,end_date,...) <span class="keyword">values</span>(原记录<span class="keyword">ID</span>,当前时间,一百年后,...);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除操作很简单，不是真的将记录从数据表中移除，只需把记录的<code>END_DATE</code>设置为当前时间即可，如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> table_name <span class="keyword">set</span> end_date=当前时间 <span class="keyword">where</span> <span class="keyword">id</span>=删除记录<span class="keyword">ID</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过这种方式可以完整地记录下数据的变化情况，使用下面的查询语句就可以获取某条记录的完整版本列表以及查看特定版本的内容：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 获取版本列表</span></span><br><span class="line"><span class="keyword">select</span> start_date <span class="keyword">from</span> table_name <span class="keyword">where</span> <span class="keyword">id</span>=记录<span class="keyword">ID</span> <span class="keyword">order</span> <span class="keyword">by</span> start_date;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看特定版本内容</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> <span class="keyword">id</span>=记录<span class="keyword">ID</span> <span class="keyword">and</span> start_date=版本日期;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>不同的业务需要根据其应用场景来选择合适的数据删除方式，一般的应用可以采用物理删除的方式，简单粗暴地将数据擦除，这样可以有效提高数据库地利用率，如果历史数据一点价值都没有或者价值不高，那还留着干什么，这时如果采用逻辑删除地方式反而加重了数据库的负担，浪费了大量宝贵的资源。但是有些项目如金融、交通、能源等领域的历史数据，往往具有很高的利用价值，通过对这些数据进行分析总结，可以更好的了解该领域的发展情况和健康程度，以及对未来的发展规划起到一定指导作用，这时就要采用逻辑删除的方式，虽然数据管理平台为了便于管理，删除了过期的数据，但数据分析系统仍能从数据库中获取到历史数据，通过抽取转换加载的过程，将历史数据转化为高价值的内容，这是目前信息技术发展的主要趋势。</p>
+<blockquote>
+<p>本文为作者<a href="https://zkhdev.github.io/" target="_blank" rel="noopener">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/09/04/db-delete/。" target="_blank" rel="noopener">https://zkhdev.github.io/2017/09/04/db-delete/。</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/大数据/" rel="tag"># 大数据</a>
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/31/js-dao/" rel="next" title="JS设计模式（三） 数据访问对象模式">
+                <i class="fa fa-chevron-left"></i> JS设计模式（三） 数据访问对象模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/22/java-cors/" rel="prev" title="Java实现CORS跨域请求">
+                Java实现CORS跨域请求 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="kMacro" />
+            
+              <p class="site-author-name" itemprop="name">kMacro</p>
+              <p class="site-description motion-element" itemprop="description">好好学习，天天向上:)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZKHDEV" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhangkh100@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/7c65dc20fdaa" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/zkh_101" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#删除方式"><span class="nav-number">1.</span> <span class="nav-text">删除方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#物理删除"><span class="nav-number">1.1.</span> <span class="nav-text">物理删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑删除"><span class="nav-number">1.2.</span> <span class="nav-text">逻辑删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.3.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现思路"><span class="nav-number">1.4.</span> <span class="nav-text">实现思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记删除"><span class="nav-number">1.4.1.</span> <span class="nav-text">标记删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉链"><span class="nav-number">1.4.2.</span> <span class="nav-text">拉链</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写在最后"><span class="nav-number">2.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kMacro</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

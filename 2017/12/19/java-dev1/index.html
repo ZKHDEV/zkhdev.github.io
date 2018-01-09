@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近在看公司项目源码(Java)的时候，发现项目的结构非常清晰，后期维护非常便捷，原因就是运用了很多巧妙的开发技巧，在这里也和大家分享一下，希望对你们有帮助。">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java开发小技巧（一）">
+<meta property="og:url" content="http://yoursite.com/2017/12/19/java-dev1/index.html">
+<meta property="og:site_name" content="kMacro">
+<meta property="og:description" content="最近在看公司项目源码(Java)的时候，发现项目的结构非常清晰，后期维护非常便捷，原因就是运用了很多巧妙的开发技巧，在这里也和大家分享一下，希望对你们有帮助。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-346b93b942ca64bf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-09T14:28:55.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java开发小技巧（一）">
+<meta name="twitter:description" content="最近在看公司项目源码(Java)的时候，发现项目的结构非常清晰，后期维护非常便捷，原因就是运用了很多巧妙的开发技巧，在这里也和大家分享一下，希望对你们有帮助。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/5266042-346b93b942ca64bf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/19/java-dev1/"/>
+
+
+
+
+
+  <title>Java开发小技巧（一） | kMacro</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">kMacro</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Make the best of things</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/19/java-dev1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kMacro">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kMacro">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java开发小技巧（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-19T14:44:40+08:00">
+                2017-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/5266042-346b93b942ca64bf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>最近在看公司项目源码(Java)的时候，发现项目的结构非常清晰，后期维护非常便捷，原因就是运用了很多巧妙的开发技巧，在这里也和大家分享一下，希望对你们有帮助。<br><a id="more"></a><br>相信许多程序员在看别人写的代码的时候，会有怀疑人生的感想，面对一堆天书一样的代码，很难摸清作者的思路，最后选择了重构，如果你认同上面这个作法，说明了两个问题：要么原来的开发者技术菜、要么你技术菜。</p>
+<p>企业级项目的开发不是一个开发人员就能完成的，开发过程中往往会有一些需求变更、人员调动，所以代码的编写规范非常非常重要，你要确保项目交接后，后续开发人员可以看懂你的东西，知道如何进行后期的维护和功能迭代。</p>
+<h1 id="1-IP地址变量化"><a href="#1-IP地址变量化" class="headerlink" title="1.IP地址变量化"></a>1.IP地址变量化</h1><p>相信大家在连接数据库的时候是这样写的：</p>
+<blockquote>
+<p>jdbc:mysql://127.0.0.1:3306/test</p>
+</blockquote>
+<p>这是连接本地MySql数据库的字符串，这句话看起来没有问题，但是大多数企业项目会把数据库独立出来，使用数据库一体机或远程数据库，这时候就需要修改上面的IP了，如果项目少这样写没什么问题，但是如果项目多了，岂不是每个项目都要去修改，这样显得非常不智能，所以解决方案来了：</p>
+<h2 id="使用hosts文件使IP地址变量化"><a href="#使用hosts文件使IP地址变量化" class="headerlink" title="使用hosts文件使IP地址变量化"></a>使用hosts文件使IP地址变量化</h2><p>首先介绍一下hosts文件，它的作用就是将一些网址域名与其对应的IP地址建立一个关联，相当于本地的DNS域名解析器，当用户访问一个网址时，系统会首先从hosts文件中寻找对应的IP地址，一旦找到，系统会立即访问对应的IP，如果没有找到，则系统再会将网址提交DNS域名解析服务器进行IP地址的解析。</p>
+<blockquote>
+<p>Windows中hosts文件位于<code>C:\Windows\System32\drivers\etc\hosts</code>，Linux中位于<code>/etc/hosts</code></p>
+</blockquote>
+<p>现在我们把数据库连接字符串改成这样子：</p>
+<blockquote>
+<p>jdbc:mysql://mydb:3306/test</p>
+</blockquote>
+<p>与之前的不同之处在于，将<code>127.0.0.1</code>的IP地址改成了变量名<code>mydb</code></p>
+<p>接着我们来修改hosts文件，打开hosts文件其实你可以看到，平时我们使用的<code>localhost</code>其实是默认解析到IP<code>127.0.0.1</code>上的，我们可以在文件最下面添加这样一行配置：</p>
+<blockquote>
+<p>127.0.0.1 mydb</p>
+</blockquote>
+<p>大功告成，运行项目你会发现一切正常，这就是将IP地址变量化的方法，如果之后公司要求将数据库迁移到其它地方，只需修改一下服务器的hosts文件即可，服务器上面所有的项目就能正常连接数据库了，是不是很方便呢</p>
+<h1 id="2-配置文件式开发"><a href="#2-配置文件式开发" class="headerlink" title="2.配置文件式开发"></a>2.配置文件式开发</h1><p>在我们的开发中经常会有一些需要预先定义好的变量或者常量，比如数据库连接配置、Sql语句等等，如果把它们写死在代码里面，会显得很不灵活，因为Java是一种编译型开发语言，修改代码需要重新编译和部署，于是我们可以使用这种方法——将变量存放到配置文件中。</p>
+<p>这样如果我们修改了变量内容，也不需要重新编译，像Spring、Mybatis等大多是Java框架都是利用这种方式来工作的。</p>
+<p>下面举一个简单的例子：</p>
+<p>首先我们新建一个<code>config.properties</code>的配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.driver=com.mysql.jdbc.Driver</span><br><span class="line">db.url=jdbc:mysql://mydb:3306/test?characterEncoding=utf8&amp;useSSL=true&amp;serverTimezone=UTC</span><br><span class="line">db.username=root</span><br><span class="line">db.password=toor</span><br></pre></td></tr></table></figure></p>
+<p>这是一个简单的数据库连接配置文件，然后我们在代码中加载这个文件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"config.properties"</span>);</span><br><span class="line"><span class="keyword">if</span>(!file.exists() &amp;&amp; file.isDirectory())&#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> FileNotFoundException(<span class="string">"缺少配置文件config.properties"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">Properties prop = <span class="keyword">new</span> Properties();</span><br><span class="line">FileInputStream in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">InputStreamReader reader = <span class="keyword">new</span> InputStreamReader(in, <span class="string">"UTF-8"</span>);  <span class="comment">//解决文件编码问题</span></span><br><span class="line">prop.load(reader);  <span class="comment">//加载配置内容到prop对象中</span></span><br></pre></td></tr></table></figure></p>
+<p>这样我们就可以通过Properties提供的方法来获取相应的配置了，如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String url = prop.getProperty(<span class="string">"db.url"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>加载配置文件还有一种方式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">InputStream in = getClass().getResourceAsStream(<span class="string">"config.properties"</span>);</span><br><span class="line">prop.load(in);</span><br></pre></td></tr></table></figure></p>
+<p>这是通过classpath来获取配置文件，但是要求配置文件必须放在classpath中，而且需要注意的是，如果你将项目打包成jar包，配置文件也会被一起打包，没办法对文件进行修改了。</p>
+<p>使用<code>Properties prop = System.getProperties();</code>还可以获取JVM的一些配置，比如系统换行符等信息，在读取解析本地文件内容时是很有用：<code>System.getProperty(&quot;line.separator&quot;)</code></p>
+<p>以上只是使用配置文件的一个简单说明，这种方式在开发一些工具程序的时候非常有用。</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>今天先写到这吧，下一篇文章将给大家分享一个很实用的方法：利用Maven打造一个通用的工程，可以把一些通用的配置信息、类、方法进行统一管理，并且为其它工程提供服务，敬请期待哟</p>
+<blockquote>
+<p>本文为作者<a href="https://zkhdev.github.io/" target="_blank" rel="noopener">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/12/19/java-dev1/。" target="_blank" rel="noopener">https://zkhdev.github.io/2017/12/19/java-dev1/。</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/22/java-cors/" rel="next" title="Java实现CORS跨域请求">
+                <i class="fa fa-chevron-left"></i> Java实现CORS跨域请求
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/21/java-dev2/" rel="prev" title="Java开发小技巧（二）：自定义Maven依赖">
+                Java开发小技巧（二）：自定义Maven依赖 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="kMacro" />
+            
+              <p class="site-author-name" itemprop="name">kMacro</p>
+              <p class="site-description motion-element" itemprop="description">好好学习，天天向上:)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZKHDEV" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhangkh100@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/7c65dc20fdaa" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/zkh_101" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-IP地址变量化"><span class="nav-number">1.</span> <span class="nav-text">1.IP地址变量化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用hosts文件使IP地址变量化"><span class="nav-number">1.1.</span> <span class="nav-text">使用hosts文件使IP地址变量化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-配置文件式开发"><span class="nav-number">2.</span> <span class="nav-text">2.配置文件式开发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写在最后"><span class="nav-number">3.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kMacro</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
