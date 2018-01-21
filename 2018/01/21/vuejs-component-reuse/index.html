@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="kMacro&#39;s blog">
 <meta property="og:description" content="组件系统是Vue的一个重要组成部分，它可以将一个复杂的页面抽象分解成许多小型、独立、可复用的组件，通过组合组件来组成应用程序，结合vue-router的路由功能将各个组件映射到相应的路由上，通过路由的变化来告诉Vue要在哪里渲染他们，实现各个组件、各个页面之间的跳转导航。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-21T06:55:02.288Z">
+<meta property="og:updated_time" content="2018-01-21T06:59:17.967Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue-router 组件复用问题">
 <meta name="twitter:description" content="组件系统是Vue的一个重要组成部分，它可以将一个复杂的页面抽象分解成许多小型、独立、可复用的组件，通过组合组件来组成应用程序，结合vue-router的路由功能将各个组件映射到相应的路由上，通过路由的变化来告诉Vue要在哪里渲染他们，实现各个组件、各个页面之间的跳转导航。">
@@ -421,6 +421,9 @@
 <li>复用没有进行更新的组件</li>
 <li>启用并激活新的组件</li>
 </ul>
+<blockquote>
+<p>具体路由切换控制流程请参考官方文档：<a href="https://github.com/vuejs/vue-router/blob/1.0/docs/zh-cn/pipeline/README.md" target="_blank" rel="noopener">切换控制流水线</a></p>
+</blockquote>
 <p><strong>那<code>vue-router</code>是怎么判断某一个组件可以复用的呢？</strong> 我们看一下下面这条路由配置：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">'post/:postId'</span>,</span><br><span class="line">    name: <span class="string">'post'</span>,</span><br><span class="line">    component: <span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">require</span>([<span class="string">'./components/Post.vue'</span>],resolve)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这是通过文章ID加载对应文章页面的路由，第一次访问时，<code>Post.vue</code>这个组件会被渲染到组件树中，mounted安装组件时通过文章ID获取文章内容展示到页面上，当我们访问另一篇文章时，路由参数<code>:postId</code>发生改变，按照我们的预期应该会展示新文章的内容，但是事与愿违。</p>
 <p>我们看到的还是之前的文章，虽然路由参数已发生更改，但是<code>vue-router</code>会以为你访问的是<code>Post.vue</code>这个组件，由于之前已经渲染过该组件，所以会直接复用之前的组件，并且<strong>不会</strong>执行组件中的任何操作包括<code>mounted</code>之类的生命周期函数。</p>
