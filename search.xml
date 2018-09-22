@@ -3,6 +3,122 @@
   
     
     <entry>
+      <title><![CDATA[数据仓库（一）：认识数据仓库]]></title>
+      <url>/2018/09/22/dw-begin/</url>
+      <content type="html"><![CDATA[<p><img src="http://omzy9bjcy.bkt.clouddn.com/%E6%9C%AA%E6%A0%87%E9%A2%98-10.png" alt=""></p>
+<p>刚接触数据仓库是在我的第一份实习工作——数据中心数据管理系统开发，它是一个B/S架构的应用，与一般的项目不同的是，系统是以数据仓库来进行数据存取的，这是我第一次听说数仓这个词，感觉它庞大而且神秘，不知道从何入手，对数据仓库有一种敬畏之心，后来经过慢慢的学习和使用，发现其实它在应用开发中的使用方法跟传统关系数据库没什么区别，无非就是普通的SQL查询以及JDBC连接。所以数仓的使用不是本文的重点，我们主要来认识一下数据仓库到底是什么。<br><a id="more"></a></p>
+<blockquote>
+<p><strong>文章要点</strong></p>
+<ul>
+<li>什么是数据仓库</li>
+<li>数据中心架构</li>
+<li>数据仓库内部架构</li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="什么是数据仓库"><a href="#什么是数据仓库" class="headerlink" title="什么是数据仓库"></a>什么是数据仓库</h1><p>数据仓库（Data Warehouse）是面向主题的、集成的、稳定的、随时间变化的数据集合，用来支持运营管理中的决策制定，为用户提供各种手段从数据中获取有用的信息。它的根本任务是对大量的业务数据进行归纳整理以及重组，然后提供给决策管理人员。</p>
+<p>数据仓库是依赖于数据库进行数据存储和管理的，所以数据库是整个数据仓库的核心。相对于传统数据库来说数仓的数据库最突出的特点是对海量数据的支持和快速的检索技术，最具代表性的是Teradata公司的Teradata数据库。数据仓库平台即数据库和其它各种软件工具整合的一套数据仓库软件。</p>
+<hr>
+<h1 id="数据中心架构"><a href="#数据中心架构" class="headerlink" title="数据中心架构"></a>数据中心架构</h1><p>数据中心的简化架构如下图：</p>
+<p><img src="http://omzy9bjcy.bkt.clouddn.com/%E6%97%A0%E6%A0%87%E9%A2%98.png" alt="数据中心架构"></p>
+<style>table th:last-of-type { width: 400px;}</style>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>业务系统</td>
+<td>数据仓库的数据来源系统，提供各种所需的业务系统数据，如清算系统、票务系统等业务数据</td>
+</tr>
+<tr>
+<td>数据加载</td>
+<td>通过FTP文件传输或者数据库连接等方式，从业务系统中抽取数据统一存放，并提供给下游应用进行访问</td>
+</tr>
+<tr>
+<td>数据仓库</td>
+<td>数据加载到数据仓库后，通过预先定义的<strong>数据模型</strong>处理数据，并进行存放汇总，包含临时数据、核心模型数据、集市数据和元数据等，提供给下游应用使用</td>
+</tr>
+<tr>
+<td>访问代理</td>
+<td>为下游应用对数据仓库的访问提供负载均衡、灾备系统切换等服务</td>
+</tr>
+<tr>
+<td>数据访问</td>
+<td>各下游应用如统计分析、运营评估、信息管理等应用平台，对数据仓库的数据进行查询获取，可通过导出数据文件或数据库连接等方式进行访问</td>
+</tr>
+<tr>
+<td>ETL管理</td>
+<td>对数据抽取转换加载（ETL）的管理，它是构建数据仓库的重要一环，包括总体控制、作业管理、上下游依赖管理、错误管理、调度监控等所有ETL相关内容的管理</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="数据仓库内部架构"><a href="#数据仓库内部架构" class="headerlink" title="数据仓库内部架构"></a>数据仓库内部架构</h1><p>数据仓库的真正关键是数据的存储和管理。数据仓库的组织管理方式决定了它有别于传统数据库，其中一个重要的特点是对数据的分区管理，ETL会根据预先定义的数据模型以及各种数据的用途，来对数仓中的数据进行划分，它的内部架构一般是这样的：</p>
+<p><img src="http://omzy9bjcy.bkt.clouddn.com/%E6%97%A0%E6%A0%87%E9%A2%982.png" alt="数据仓库内部架构"></p>
+<table>
+<thead>
+<tr>
+<th>数据区</th>
+<th>数据区名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>STG</td>
+<td>临时区</td>
+<td>存放从源系统抽取的原始数据</td>
+</tr>
+<tr>
+<td>ODS</td>
+<td>操作镜像区</td>
+<td>完成原始数据的增量累全量工作，保留较短历史数据</td>
+</tr>
+<tr>
+<td>PDM</td>
+<td>物理数据模型区</td>
+<td>基于数据模型设计，存放规范化数据，保留较长历史数据</td>
+</tr>
+<tr>
+<td>SUM</td>
+<td>基础数据衍生区</td>
+<td>存放预统计、预汇总数据，提炼出对数据仓库具有共性的数据访问、统计需求，从而构建出的一个面向支持应用系统、数据分析与数据挖掘提供共享的数据访问服务的公共数据区</td>
+</tr>
+<tr>
+<td>APP</td>
+<td>应用集市区</td>
+<td>按照应用系统分别建立，存放为某类特定的业务系统服务的数据集合，根据业务需要的重度汇总数据</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>本文为作者<a href="https://zkhdev.github.io/">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2018/09/22/dw-begin/。">https://zkhdev.github.io/2018/09/22/dw-begin/。</a></p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> 大数据 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 大数据 </tag>
+            
+            <tag> 数据仓库 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[vue-router 组件复用问题]]></title>
       <url>/2018/01/21/vuejs-component-reuse/</url>
       <content type="html"><![CDATA[<p>组件系统是Vue的一个重要组成部分，它可以将一个复杂的页面抽象分解成许多小型、独立、可复用的组件，通过组合组件来组成应用程序，结合<code>vue-router</code>的路由功能将各个组件映射到相应的路由上，通过路由的变化来告诉Vue要在哪里渲染他们，实现各个组件、各个页面之间的跳转导航。<br><a id="more"></a></p>
@@ -462,9 +578,9 @@
             
             <tag> 大数据 </tag>
             
-            <tag> teradata </tag>
-            
             <tag> 数据仓库 </tag>
+            
+            <tag> teradata </tag>
             
         </tags>
         
@@ -612,7 +728,7 @@
 <p>impress.js是一个基于CSS3和现代浏览器，受Prezi.com的启发而创作出来的前端多功能演示js框架，可以用它来替代PowerPoint制作更加酷炫的PPT，如果你是一位前端开发者或者勉强了解HTML和CSS，都能很快上手。<br><a id="more"></a><br>这是一个<a href="http://impress.github.io/impress.js/#/bored" target="_blank" rel="noopener">官方Demo</a>，效果不错吧。</p>
 <p>impress.js 是基于 webkit 浏览器（Chrome、Safari）开发，在其它基于非 webkit 引擎，但支持 CSS3 3D 的浏览器也能正常运行。</p>
 <p>impress.js源码已经发布在GitHub上，地址：<a href="https://github.com/impress/impress.js" target="_blank" rel="noopener">https://github.com/impress/impress.js</a></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="引入impress-js文件并初始化"><a href="#引入impress-js文件并初始化" class="headerlink" title="引入impress.js文件并初始化"></a>引入impress.js文件并初始化</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"impress.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;impress().init();<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="引入impress-js文件并初始化"><a href="#引入impress-js文件并初始化" class="headerlink" title="引入impress.js文件并初始化"></a>引入impress.js文件并初始化</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"impress.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;impress().init();&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="根结点"><a href="#根结点" class="headerlink" title="根结点"></a>根结点</h2><p>impress.js需要一个id为<code>impress</code>的根元素，演示文档的所有内容都包含在该元素中。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"impress"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="步骤结点"><a href="#步骤结点" class="headerlink" title="步骤结点"></a>步骤结点</h2><p>步骤元素包含将在屏幕中呈现的内容，是演示文档的基本单元，相当于一张幻灯片，每个步骤元素包含名为<code>step</code>的class<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"step"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">q</span>&gt;</span>这是第一张页面<span class="tag">&lt;/<span class="name">q</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>在该元素中可以定义各种精彩呈现效果的属性，用来表示页面以怎样的方式出现到屏幕中央。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">data-x = 幻灯片x坐标</span><br><span class="line">data-y = 幻灯片y坐标</span><br><span class="line">data-scale = 缩放比例</span><br><span class="line">data-rotate = 平面旋转角度</span><br><span class="line">data-rotate-x = x轴旋转角度(3D)</span><br><span class="line">data-rotate-y = y轴旋转角度(3D)</span><br><span class="line">data-rotate-z = z轴旋转角度(3D)</span><br></pre></td></tr></table></figure></p>

@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>https://zkhdev.github.io/2018/09/22/dw-begin/</loc>
+    <lastmod>2018-09-22T13:52:33.336Z</lastmod>
+    <data>
+        <display>
+        <title>数据仓库（一）：认识数据仓库</title>
+        <pubTime>2018-09-22T13:16:44.000Z</pubTime>
+        
+        <tag>大数据</tag>
+         
+        <tag>数据仓库</tag>
+         
+         
+           
+             
+              <breadCrumb title="大数据" url="https://zkhdev.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://zkhdev.github.io/2018/01/21/vuejs-component-reuse/</loc>
-    <lastmod>2018-01-21T06:59:17.967Z</lastmod>
+    <lastmod>2018-01-21T07:30:50.495Z</lastmod>
     <data>
         <display>
         <title>vue-router 组件复用问题</title>
@@ -30,7 +52,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2016/11/20/centos7-lamp2/</loc>
-    <lastmod>2018-01-10T01:22:01.864Z</lastmod>
+    <lastmod>2018-01-10T01:22:01.865Z</lastmod>
     <data>
         <display>
         <title>CentOS 7搭建LAMP环境（二）</title>
@@ -122,7 +144,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2016/09/13/tp-phpmailer/</loc>
-    <lastmod>2018-01-09T14:59:37.854Z</lastmod>
+    <lastmod>2018-01-09T14:59:37.855Z</lastmod>
     <data>
         <display>
         <title>Thinkphp使用PHPMailer发送邮件</title>
@@ -188,7 +210,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2017/04/22/js-single/</loc>
-    <lastmod>2018-01-09T14:42:50.155Z</lastmod>
+    <lastmod>2018-01-09T14:42:50.156Z</lastmod>
     <data>
         <display>
         <title>JavaScript设计模式（一） 单例模式</title>
@@ -212,7 +234,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2017/03/20/algorithm-single-linked-inversion/</loc>
-    <lastmod>2018-01-09T14:41:22.727Z</lastmod>
+    <lastmod>2018-01-09T14:41:22.728Z</lastmod>
     <data>
         <display>
         <title>算法笔记 - 单链表反转(Java)</title>
@@ -234,7 +256,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2018/01/06/vuejs-begin/</loc>
-    <lastmod>2018-01-09T14:40:07.456Z</lastmod>
+    <lastmod>2018-01-09T14:40:07.457Z</lastmod>
     <data>
         <display>
         <title>Vuejs之开发环境搭建</title>
@@ -258,7 +280,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2017/01/23/ubuntu-sqlserver/</loc>
-    <lastmod>2018-01-09T14:39:51.736Z</lastmod>
+    <lastmod>2018-01-09T14:39:51.737Z</lastmod>
     <data>
         <display>
         <title>Ubuntu 安装 SQL Server</title>
@@ -282,7 +304,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2016/12/03/ubuntu-apache-rewrite/</loc>
-    <lastmod>2018-01-09T14:39:13.413Z</lastmod>
+    <lastmod>2018-01-09T14:39:13.414Z</lastmod>
     <data>
         <display>
         <title>Ubuntu下Apache开启Rewrite模块</title>
@@ -314,9 +336,9 @@
         
         <tag>大数据</tag>
          
-        <tag>teradata</tag>
-         
         <tag>数据仓库</tag>
+         
+        <tag>teradata</tag>
          
          
            
@@ -354,7 +376,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2017/07/31/js-dao/</loc>
-    <lastmod>2018-01-09T14:36:14.013Z</lastmod>
+    <lastmod>2018-01-09T14:36:14.014Z</lastmod>
     <data>
         <display>
         <title>JS设计模式（三） 数据访问对象模式</title>
@@ -402,7 +424,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2017/12/22/java-dev3/</loc>
-    <lastmod>2018-01-09T14:31:12.512Z</lastmod>
+    <lastmod>2018-01-09T14:31:12.513Z</lastmod>
     <data>
         <display>
         <title>Java开发小技巧（三）：Maven多工程依赖项目</title>
@@ -466,7 +488,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2017/09/22/java-cors/</loc>
-    <lastmod>2018-01-09T14:27:52.173Z</lastmod>
+    <lastmod>2018-01-09T14:27:52.174Z</lastmod>
     <data>
         <display>
         <title>Java实现CORS跨域请求</title>
@@ -578,7 +600,7 @@
     
   <url>
     <loc>https://zkhdev.github.io/2017/03/02/algorithm-trie/</loc>
-    <lastmod>2018-01-09T14:21:15.483Z</lastmod>
+    <lastmod>2018-01-09T14:21:15.484Z</lastmod>
     <data>
         <display>
         <title>算法笔记 - Trie树</title>
