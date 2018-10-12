@@ -90,7 +90,7 @@
 <meta property="og:description" content="HTML5提供了两种在客户端存储数据的新方法：localStorage、sessionStorage，他们是Web Storage API 提供的两种存储机制，区别在于前者属于永久性存储，而后者是局限于当前窗口的数据传递，存储在其中的数据会在当前会话结束时被删除。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-1f0d1bdc6a06f32b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2">
-<meta property="og:updated_time" content="2018-01-09T14:36:14.014Z">
+<meta property="og:updated_time" content="2018-10-12T14:56:48.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS设计模式（三） 数据访问对象模式">
 <meta name="twitter:description" content="HTML5提供了两种在客户端存储数据的新方法：localStorage、sessionStorage，他们是Web Storage API 提供的两种存储机制，区别在于前者属于永久性存储，而后者是局限于当前窗口的数据传递，存储在其中的数据会在当前会话结束时被删除。">
@@ -427,7 +427,7 @@
 <h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dao = <span class="keyword">new</span> Dao(<span class="string">'myModule_'</span>);</span><br><span class="line"><span class="comment">// 添加/修改数据</span></span><br><span class="line">dao.set(<span class="string">'token'</span>, <span class="string">'abc'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="built_in">arguments</span>); &#125;);</span><br><span class="line"><span class="comment">// 获取数据</span></span><br><span class="line"><span class="keyword">var</span> value = dao.get(<span class="string">'token'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="built_in">arguments</span>); &#125;);</span><br><span class="line"><span class="built_in">console</span>.log(value);</span><br><span class="line"><span class="comment">// 删除数据</span></span><br><span class="line">dao.remove(<span class="string">'token'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="built_in">arguments</span>); &#125;);</span><br></pre></td></tr></table></figure>
 <h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>其实数据访问对象模式更适合与服务器端的数据库操作，比如在nodejs中操作MongoDB，通过对数据库增删改查操作的封装，可以方便我们对前端存储的管理，不必为操作数据库感到烦恼，DAO已经为我们提供了便捷统一的接口，这样在团队开发中就不用担心影响到其他人的数据了。</p>
 <blockquote>
-<p>本文为作者<a href="https://zkhdev.github.io/">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/07/31/js-dao/。">https://zkhdev.github.io/2017/07/31/js-dao/。</a></p>
+<p>本文为作者<a href="https://zkhdev.github.io/">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/07/31/js-dao/">https://zkhdev.github.io/2017/07/31/js-dao/</a></p>
 </blockquote>
 
       

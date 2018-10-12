@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-3a8a8be63de67b76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5266042-ea5f11bcecc5720d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-01-09T14:38:20.207Z">
+<meta property="og:updated_time" content="2018-10-12T14:57:44.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据仓库 - Teradata学习体会">
 <meta name="twitter:description" content="随着计算机系统在处理能力、存储能力等方面，特别是计算机软件技术的不断提高，使得信息处理技术得到飞速发展。数据处理主要分为两大类：联机事物处理OLTP、联机分析处理OLAP。OLTP也就是传统的关系型数据库应用，主要功能是基本的、日常的事务处理操作，对响应时间要求非常高，是一种面向应用的生产系统。OLAP是基于数据仓库的面向主题的信息分析处理过程。">
@@ -418,7 +418,7 @@
       
         <p><img src="http://upload-images.jianshu.io/upload_images/5266042-3a8a8be63de67b76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>随着计算机系统在处理能力、存储能力等方面，特别是计算机软件技术的不断提高，使得信息处理技术得到飞速发展。数据处理主要分为两大类：联机事物处理OLTP、联机分析处理OLAP。OLTP也就是传统的关系型数据库应用，主要功能是基本的、日常的事务处理操作，对响应时间要求非常高，是一种面向应用的生产系统。OLAP是基于数据仓库的面向主题的信息分析处理过程。<br><a id="more"></a></p>
-<h1 id="什么是数据仓库"><a href="#什么是数据仓库" class="headerlink" title="什么是数据仓库"></a>什么是数据仓库</h1><p>与传统关系型数据库不同的是，数据仓库储存的是历史数据，针对数据仓库系统的查询大都非常复杂，特别消耗系统资源，对系统的可扩展能力和并行处理能力要求很高。数据仓库主要面向业务人员和管理人员，用来帮助企业管理人员作出更符合业务发展规律的决策，所以也称数据仓库为决策支持系统。数据仓库的数据来自多个数据库，并且按照预先定义好的模型对抽取的数据进行转换过滤，再将结果存放到数据仓库中。</p>
+<h1 id="什么是数据仓库"><a href="#什么是数据仓库" class="headerlink" title="什么是数据仓库"></a>什么是数据仓库</h1><p>数据仓库储存的是历史数据，针对数据仓库系统的查询大都非常复杂，特别消耗系统资源，对系统的可扩展能力和并行处理能力要求很高。数据仓库主要面向业务人员和管理人员，用来帮助企业管理人员作出更符合业务发展规律的决策，所以也称数据仓库为决策支持系统。数据仓库的数据来自多个数据库，并且按照预先定义好的模型对抽取的数据进行转换过滤，再将结果存放到数据仓库中。</p>
 <h1 id="Teradata-数据库"><a href="#Teradata-数据库" class="headerlink" title="Teradata 数据库"></a>Teradata 数据库</h1><p>为了解决传统数据库在大量数据的查询分析等方面的局限性，Teradata公司推出了Teradata关系数据库管理系统。Teradata采用标准的SQL查询语言，适用于处理复杂查询数据仓库应用。   </p>
 <h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Teradata的主要组件是<strong>解析引擎、BYNET和访问模块处理器（AMP）</strong>。<br><img src="http://upload-images.jianshu.io/upload_images/5266042-ea5f11bcecc5720d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <ul>
@@ -432,7 +432,7 @@
 <p>当然，传统的关系型数据库也是可以完成基本的事务处理和数据分析操作的，但是当数据量非常庞大时，数据库就显得无能为力了。比如，一个早期的电商平台，只需一个网站、几台服务器、一个MySQL就可以运营了，当客户增多、数据量增大时，只需采用多台服务器、多个数据库的方式就可以勉强应付，但是随着数据量的不断增长，数据之间的关系也越来越复杂，管理人员此时关心的不是“昨天营业额是多少”这类问题，而是“哪些用户是高价值用户”、“某商品的销售量与哪些因素有关”等，这时就需要建立数据仓库了，Teradata数据仓库是专门针对决策支持系统的特点而开发的关系数据库管理系统，相对于其它商业数据库，Teradata更适合需要处理大数据量及数据分析的应用，可以极大提高应用的性能。  </p>
 <p>数据库可以存储和处理数据，而数据仓库的职责则是发掘数据的价值，最大程度地利用数据。</p>
 <blockquote>
-<p>本文为作者<a href="https://zkhdev.github.io/">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/07/30/teradata/。">https://zkhdev.github.io/2017/07/30/teradata/。</a></p>
+<p>本文为作者<a href="https://zkhdev.github.io/">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/07/30/teradata/">https://zkhdev.github.io/2017/07/30/teradata/</a></p>
 </blockquote>
 
       
