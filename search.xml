@@ -32,7 +32,7 @@
 <hr>
 <blockquote>
 <p>关于HttpClient的详细介绍看这里：<a href="https://www.ibm.com/developerworks/cn/opensource/os-httpclient/index.html" target="_blank" rel="noopener">HttpClient入门</a></p>
-<p>本文为作者<a href="https://zkhdev.github.io/">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2018/10/12/java_dev5/">https://zkhdev.github.io/2018/10/12/java_dev5/</a>。</p>
+<p>本文为作者<a href="https://zkhdev.github.io/">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2018/10/12/java-dev5/。">https://zkhdev.github.io/2018/10/12/java-dev5/。</a></p>
 </blockquote>
 ]]></content>
       
@@ -335,7 +335,7 @@
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>项目终于开发演示完毕，这里只是创建一个打造可执行jar包的子项目作为例子，你还可以创建多个子项目，最后打包的时候合并相同的依赖和配置文件，然后在<code>bin</code>中创建相应项目的执行文件即可，各个子项目之间也可进行相互依赖。<br>以上开发技巧不仅适用于可执行jar包的开发，同样适用于WEB项目的开发，具体还是由项目需求决定。</p>
 <p>文章项目源码已发布到Github：<a href="https://github.com/ZKHDEV/MultDependPjo" target="_blank" rel="noopener">https://github.com/ZKHDEV/MultDependPjo</a></p>
 <blockquote>
-<p>本文为作者<a href="https://zkhdev.github.io/">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/12/22/java_dev3/。">https://zkhdev.github.io/2017/12/22/java_dev3/。</a></p>
+<p>本文为作者<a href="https://zkhdev.github.io/">kMacro</a>原创，转载请注明来源：<a href="https://zkhdev.github.io/2017/12/22/java-dev3/。">https://zkhdev.github.io/2017/12/22/java-dev3/。</a></p>
 </blockquote>
 ]]></content>
       
